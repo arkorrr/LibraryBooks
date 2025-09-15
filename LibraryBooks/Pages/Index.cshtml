@@ -1,0 +1,11 @@
+﻿@page
+@model LibraryBooks.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<h2>Добро пожаловать в библиотеку!</h2>
+<p>Всего книг: @Model.TotalCount</p>
+<p>Доступно: @Model.AvailableCount</p>
+<p>Занято: @Model.UnavailableCount</p>

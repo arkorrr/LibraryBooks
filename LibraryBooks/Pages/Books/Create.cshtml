@@ -1,0 +1,17 @@
+﻿@page
+@model LibraryBooks.Pages.Books.CreateModel
+@{
+	ViewData["Title"] = "Add New Book";
+}
+
+<h2>Добавить новую книгу</h2>
+<form method="post">
+	<div>
+		<input asp-for="Input.Title" type="text" name="title" placeholder="title" required />
+		<input asp-for="Input.Author" type="text" name="author" placeholder="author" required />
+		<input asp-for="Input.Genre" type="text" name="genre" placeholder="genre" required />
+	</div>
+	
+	<button type="submit">Добавить</button>
+</form>
+ 

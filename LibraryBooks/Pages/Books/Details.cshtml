@@ -1,0 +1,17 @@
+﻿@page "{id:int}"
+@model LibraryBooks.Pages.Books.DetailsModel
+@{
+	ViewData["Title"] = "Book Details";
+}
+
+<h2>Детали книги</h2>
+
+<p>Название: @Model.Book?.Title</p>
+<p>Автор: @Model.Book?.Author</p>
+<p>Жанр: @Model.Book?.Genre</p>
+<p>Доступна: @(Model.Book?.IsAvailable == true ? "Да" : "Нет")</p>
+
+<p>
+	<a asp-page="./Index">← Назад к списку</a>
+</p>
+
