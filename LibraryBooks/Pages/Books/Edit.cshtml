@@ -1,0 +1,23 @@
+﻿@page "{id:int}"
+@model LibraryBooks.Pages.Books.EditModel
+@{
+	ViewData["Title"] = "Edit Book";
+}
+<h2>Edit Book</h2>
+
+<form method="post">
+	<div>
+		<input asp-for="Input.Title" type="text" name="title" placeholder="title" required />
+		<input asp-for="Input.Author" type="text" name="author" placeholder="author" required />
+		<input asp-for="Input.Genre" type="text" name="genre" placeholder="genre" required />
+	</div>
+	<button type="submit">Сохранить</button>
+	<a asp-page="./Index">Отмена</a>
+</form>
+
+<p>
+	<a asp-page="./Index">← Назад к списку</a>
+</p>
+
+
+

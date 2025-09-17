@@ -10,11 +10,24 @@ namespace LibraryBooks.Pages.Books
     {
 		public IEnumerable<Book> Books { get; private set; } = new List<Book>();
 
+		[BindProperty(SupportsGet = true)]
+		public string CurrentFilter { get; set; } = string.Empty;
+
 		public void OnGet()
         {
-            Books = BookStore.Books;
+            if (!string.IsNullOrWhiteSpace(CurrentFilter))
+            {
+                Books = BookStore.Books
+                    .Where(b =>
+                        b.Title.Contains(CurrentFilter, StringComparison.OrdinalIgnoreCase) ||
+                        b.Author.Contains(CurrentFilter, StringComparison.OrdinalIgnoreCase) ||
+                        b.Genre.Contains(CurrentFilter, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                Books = BookStore.Books;
+            }
         }
-
 
     }
 }

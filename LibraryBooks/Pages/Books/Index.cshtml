@@ -9,6 +9,14 @@
   <a asp-page="./Create">Добавить новую книгу</a>
 </p>
 
+<div>
+    <form method="get">
+        <input asp-for="CurrentFilter" placeholder="Поиск по названию, автору или жанру" style="width: 250px;" />
+        <button type="submit">Поиск</button>
+    </form>
+</div>
+
+
 @foreach (var book in Model.Books)
 {
     <p>Название: @book.Title</p>
@@ -16,8 +24,12 @@
     <p>Жанр: @book.Genre</p>
     <p>
         <a asp-page="./Details" asp-route-id="@book.Id">Просмотреть Детали</a>
+        <a asp-page="./Edit" asp-route-id="@book.Id">Редактировать</a>
+        <a asp-page="./Delete" asp-route-id="@book.Id">Удалить</a>
     </p>
 }
+
+
 
 
 		
