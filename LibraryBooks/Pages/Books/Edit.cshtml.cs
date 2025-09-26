@@ -2,6 +2,7 @@ using LibraryBooks.Data;
 using LibraryBooks.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace LibraryBooks.Pages.Books
 {
@@ -10,7 +11,10 @@ namespace LibraryBooks.Pages.Books
 		[BindProperty]
 		public Book? Input { get; set; }
 
-		public void OnGet()
+        private readonly IMemoryCache _cache;
+        public EditModel(IMemoryCache cache) => _cache = cache;
+
+        public void OnGet()
         {
            
         }
@@ -27,9 +31,13 @@ namespace LibraryBooks.Pages.Books
 				return NotFound();
 			}
 
+			var bookKey = $"book:{id}";
+
 			book.Title = Input.Title;
 			book.Author = Input.Author;
 			book.Genre = Input.Genre;
+
+			_cache.Set(bookKey, book);
 
 			return RedirectToPage("./Index");
 		}
