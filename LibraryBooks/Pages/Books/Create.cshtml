@@ -6,10 +6,20 @@
 
 <h2>Добавить новую книгу</h2>
 <form method="post">
+
 	<div>
-		<input asp-for="Input.Title" type="text" name="title" placeholder="title" required />
-		<input asp-for="Input.Author" type="text" name="author" placeholder="author" required />
-		<input asp-for="Input.Genre" type="text" name="genre" placeholder="genre" required />
+		<input asp-for="Input.Title" type="text" placeholder="Title" />
+		<span asp-validation-for="Input.Title"></span>
+	</div>
+	
+	<div>
+		<input asp-for="Input.Author" type="text" placeholder="Author" />
+		<span asp-validation-for="Input.Author"></span>
+	</div>
+
+	<div>
+		<input asp-for="Input.Genre" type="text" placeholder="Genre"  />
+		<span asp-validation-for="Input.Genre"></span>
 	</div>
 	
 	<button type="submit">Добавить</button>

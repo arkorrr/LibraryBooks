@@ -44,7 +44,7 @@ namespace LibraryBooks.Pages.Books
                     Priority = CacheItemPriority.Normal
                 };
 
-                _cache.Set(cacheKey, cachedBooks, cacheOptions);
+                _cache.Set(cacheKey, cachedBooks, cacheOptions); 
             }
 
             Books = cachedBooks;

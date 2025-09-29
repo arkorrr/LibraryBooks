@@ -1,13 +1,38 @@
+using LibraryBooks;
 using LibraryBooks.Models;
+using LibraryBooks.Resources;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+builder.Services.AddRazorPages()
+	.AddDataAnnotationsLocalization(options =>
+	{
+		options.DataAnnotationLocalizerProvider = (type, factory) =>
+			factory.Create(typeof(ValidationMessages));
+	});
+
 builder.Services.AddSingleton<Book>();
 builder.Services.AddMemoryCache();
 
 var app = builder.Build();
+
+var supportedCultures = new[] { new CultureInfo("en-US"), new CultureInfo("ru-RU") };
+
+var reqLocOptions = new RequestLocalizationOptions
+{
+	DefaultRequestCulture = new RequestCulture("en-US"),
+	SupportedCultures = supportedCultures.ToList(),
+	SupportedUICultures = supportedCultures.ToList()
+};
+
+reqLocOptions.RequestCultureProviders.Insert(0, new QueryStringRequestCultureProvider());
+reqLocOptions.RequestCultureProviders.Insert(1, new CookieRequestCultureProvider());
+
+app.UseRequestLocalization(reqLocOptions);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
